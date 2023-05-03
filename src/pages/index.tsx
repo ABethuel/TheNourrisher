@@ -1,14 +1,15 @@
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import { Header } from '@/components/Header/Header';
+import { Ingredient } from '@/components/Ingredient/Ingredient';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   return (
-    <div className="h-screen bg-[#CACACA]">
-      <div className="grid place-items-center">
-        <h1 className="text-center mt-8 font-bold w-10/12">
+    <div className="h-screen bg-[#CACACA] sm:bg-[#535961]">
+      <div className="grid place-items-center mb-10">
+        <h1 className="text-center mt-8 font-bold w-10/12 sm:text-white">
           Avec quels ingrédients souhaitez vous cuisiner aujourd&apos;hui?
         </h1>
         <form className="mt-5">
@@ -37,6 +38,29 @@ export default function Home() {
             />
           </div>
         </form>
+      </div>
+      <div className="h-screen bg-[#535961] rounded-3xl">
+        <div className="grid place-items-center">
+          <h1 className="text-center text-xl font-bold text-white pt-5">
+            Vos ingrédients
+          </h1>
+          <div className="flex flex-wrap gap-6 justify-center w-10/12 mt-10">
+            <Ingredient
+              image={
+                'https://static.vecteezy.com/system/resources/previews/013/442/147/original/tomatoes-on-a-transparent-background-free-png.png'
+              }
+              name={'Tomate'}
+              alt="tomate"
+            />
+            <Ingredient
+              image={
+                'https://static.vecteezy.com/system/resources/previews/013/442/147/original/tomatoes-on-a-transparent-background-free-png.png'
+              }
+              name={'Tomate'}
+              alt="tomate"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
