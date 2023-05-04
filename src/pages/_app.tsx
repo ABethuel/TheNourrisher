@@ -1,3 +1,5 @@
+import { GlobalState } from '@/contexts/GlobalContext/GlobalState';
+import { RecipeState } from '@/contexts/RecipeContext/RecipeState';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -13,9 +15,11 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <link rel="icon" href="/LogoTheNourisherGold.png" />
       </Head>
-      <div>
-        <Component {...pageProps} />
-      </div>
+      <GlobalState>
+        <RecipeState>
+          <Component {...pageProps} />
+        </RecipeState>
+      </GlobalState>
     </>
   );
 }

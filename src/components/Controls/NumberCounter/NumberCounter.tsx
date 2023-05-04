@@ -4,9 +4,14 @@ import { FC, useState } from 'react';
 interface Props {
   classnames?: string;
   labelsStyle?: string;
+  callBackNumber: (value: number) => void;
 }
 
-export const NumberCounter: FC<Props> = ({ classnames, labelsStyle }) => {
+export const NumberCounter: FC<Props> = ({
+  classnames,
+  labelsStyle,
+  callBackNumber,
+}) => {
   const [numberOnCounter, setNumberOnCounter] = useState(1);
   return (
     <div
@@ -20,6 +25,7 @@ export const NumberCounter: FC<Props> = ({ classnames, labelsStyle }) => {
         className=" bg-[#CACACA] text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l-2xl cursor-pointer outline-none"
         onClick={() => {
           setNumberOnCounter(numberOnCounter - 1);
+          callBackNumber(numberOnCounter);
         }}
         disabled={numberOnCounter <= 0 ? true : false}
       >
@@ -34,16 +40,21 @@ export const NumberCounter: FC<Props> = ({ classnames, labelsStyle }) => {
         className=" border-x-1 border-y-0 border-gray-600 outline-none focus:outline-none text-center w-full bg-[#CACACA] font-semibold text-sm hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
         name="custom-input-number"
         value={numberOnCounter}
+        readOnly
       ></input>
       <button
         data-action="increment"
         className="bg-[#CACACA] text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r-2xl cursor-pointer"
-        onClick={() => setNumberOnCounter(numberOnCounter + 1)}
+        onClick={() => {
+          setNumberOnCounter(numberOnCounter + 1);
+          callBackNumber(numberOnCounter);
+        }}
       >
         <span
           className={classNames(
             'text-2xl font-thin inline-block align-middle',
-            labelsStyle
+            labelsStyle,
+            'sm:text-3xl'
           )}
         >
           +

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import { Header } from '@/components/Header/Header';
-import { Ingredient } from '@/components/Ingredient/Ingredient';
+import { IngredientCard } from '@/components/Ingredient/Ingredient';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -45,14 +45,14 @@ export default function Home() {
             Vos ingrédients
           </h1>
           <div className="flex flex-wrap gap-6 justify-center w-10/12 mt-10">
-            <Ingredient
+            <IngredientCard
               image={
                 'https://static.vecteezy.com/system/resources/previews/013/442/147/original/tomatoes-on-a-transparent-background-free-png.png'
               }
               name={'Tomate'}
               alt="tomate"
             />
-            <Ingredient
+            <IngredientCard
               image={
                 'https://static.vecteezy.com/system/resources/previews/013/442/147/original/tomatoes-on-a-transparent-background-free-png.png'
               }
