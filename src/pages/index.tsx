@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import { Header } from '@/components/Header/Header';
 import { IngredientCard } from '@/components/Ingredient/Ingredient';
+import { CustomButton } from '@/components/Controls/Button/CustomButton';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -10,7 +11,7 @@ export default function Home() {
     <div className="h-screen bg-[#CACACA] sm:bg-[#535961]">
       <div className="grid place-items-center mb-10">
         <h1 className="text-center mt-8 font-bold w-10/12 sm:text-white">
-          Avec quels ingrédients souhaitez vous cuisiner aujourd&apos;hui?
+          Avec quels ingrédients souhaitez vous cuisiner aujourd&apos;hui ?
         </h1>
         <form className="mt-5">
           <div className="relative w-full">
@@ -44,7 +45,7 @@ export default function Home() {
           <h1 className="text-center text-xl font-bold text-white pt-5">
             Vos ingrédients
           </h1>
-          <div className="flex flex-wrap gap-6 justify-center w-10/12 mt-10">
+          <div className="flex flex-wrap gap-5 justify-center w-10/12 sm:w-1/3 mt-10">
             <IngredientCard
               image={
                 'https://static.vecteezy.com/system/resources/previews/013/442/147/original/tomatoes-on-a-transparent-background-free-png.png'
@@ -52,6 +53,13 @@ export default function Home() {
               name={'Tomate'}
               alt="tomate"
             />
+            <IngredientCard
+              image={
+                'https://static.vecteezy.com/system/resources/previews/013/442/147/original/tomatoes-on-a-transparent-background-free-png.png'
+              }
+              name={'Tomate'}
+              alt="tomate"
+            />{' '}
             <IngredientCard
               image={
                 'https://static.vecteezy.com/system/resources/previews/013/442/147/original/tomatoes-on-a-transparent-background-free-png.png'
@@ -60,6 +68,9 @@ export default function Home() {
               alt="tomate"
             />
           </div>
+          <CustomButton className="  fixed bottom-20">
+            Trouver une recette
+          </CustomButton>
         </div>
       </div>
     </div>

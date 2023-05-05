@@ -16,13 +16,13 @@ export const NumberCounter: FC<Props> = ({
   return (
     <div
       className={classNames(
-        'flex flex-row h-8 w-10/12  relative bg-transparent mt-1',
+        'flex flex-row h-6 w-10/12 sm:w-8/12 mt-1.5 sm:mt-2 sm:h-5.5 drop-shadow-lg',
         classnames
       )}
     >
       <button
         data-action="decrement"
-        className=" bg-[#CACACA] text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l-2xl cursor-pointer outline-none"
+        className=" bg-[#CACACA] text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 sm:w-12 rounded-l-2xl cursor-pointer outline-none"
         onClick={() => {
           setNumberOnCounter(numberOnCounter - 1);
           callBackNumber(numberOnCounter);
@@ -37,25 +37,21 @@ export const NumberCounter: FC<Props> = ({
       </button>
       <input
         type="number"
-        className=" border-x-1 border-y-0 border-gray-600 outline-none focus:outline-none text-center w-full bg-[#CACACA] font-semibold text-sm hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+        className="border-x-1 border-y-0 border-gray-600 outline-none focus:outline-none text-center sm:text-end sm:px-2 w-full bg-[#CACACA] font-semibold text-sm hover:text-black focus:text-black text-gray-700 outline-none"
         name="custom-input-number"
         value={numberOnCounter}
         readOnly
-      ></input>
+      />
       <button
         data-action="increment"
-        className="bg-[#CACACA] text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r-2xl cursor-pointer"
+        className="bg-[#CACACA] text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 sm:w-12 rounded-r-2xl cursor-pointer "
         onClick={() => {
           setNumberOnCounter(numberOnCounter + 1);
           callBackNumber(numberOnCounter);
         }}
       >
         <span
-          className={classNames(
-            'text-2xl font-thin inline-block align-middle',
-            labelsStyle,
-            'sm:text-3xl'
-          )}
+          className={classNames('text-2xl font-thin align-middle', labelsStyle)}
         >
           +
         </span>
