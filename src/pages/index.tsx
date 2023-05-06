@@ -17,7 +17,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const findRecipe = (): void => {
-    setIngredients(ingredients);
+    setIngredients(chosenIngredients);
   };
 
   useEffect(() => {
@@ -51,6 +51,15 @@ export default function Home() {
     setChosenIngredients(
       chosenIngredients.filter((ingredient) => ingredient.id !== id)
     );
+  };
+
+  const changeQuantity = (quantity: number, id: number) => {
+    const ingIndex = chosenIngredients.findIndex(
+      (ingredient) => ingredient.id === id
+    );
+    const updatedIngredients = [...chosenIngredients];
+    updatedIngredients[ingIndex].quantity = quantity + 1;
+    setChosenIngredients(updatedIngredients);
   };
 
   return (
@@ -160,6 +169,7 @@ export default function Home() {
                 key={ingredient.id}
                 id={ingredient.id}
                 removeIngredient={removeIngredient}
+                changeQuantity={changeQuantity}
               />
             ))}
           </div>

@@ -14,6 +14,7 @@ interface Props {
   alt?: string;
   name: string;
   removeIngredient: (id: number) => void;
+  changeQuantity: (quantity: number, id: number) => void;
 }
 
 export const IngredientCard: FC<Props> = ({
@@ -22,6 +23,7 @@ export const IngredientCard: FC<Props> = ({
   name,
   id,
   removeIngredient,
+  changeQuantity,
 }) => {
   const [numberOfItems, setNumberOfItems] = useState(1);
   const [ingredient, setIngredient] = useState<Ingredient>({
@@ -30,7 +32,6 @@ export const IngredientCard: FC<Props> = ({
     quantity: numberOfItems,
     image: image,
   });
-  const { addIngredient, getIngredients } = useContext(RecipeContext);
   const { isMobile } = useContext(GlobalContext);
 
   const callBackNumber = (numberOfIngredients: number) => {
@@ -38,6 +39,7 @@ export const IngredientCard: FC<Props> = ({
       ...ingredient,
       quantity: numberOfIngredients,
     }));
+    changeQuantity(numberOfIngredients, id);
   };
 
   return (
