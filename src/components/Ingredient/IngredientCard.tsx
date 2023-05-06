@@ -9,17 +9,26 @@ import {
 import { GlobalContext } from '@/contexts/GlobalContext/GlobalContext';
 
 interface Props {
+  id: number;
   image: string;
   alt?: string;
   name: string;
+  removeIngredient: (id: number) => void;
 }
 
-export const IngredientCard: FC<Props> = ({ image, alt, name }) => {
+export const IngredientCard: FC<Props> = ({
+  image,
+  alt,
+  name,
+  id,
+  removeIngredient,
+}) => {
   const [numberOfItems, setNumberOfItems] = useState(1);
   const [ingredient, setIngredient] = useState<Ingredient>({
-    id: Math.floor(Math.random() * 100000),
+    id: id,
     name: name,
     quantity: numberOfItems,
+    image: image,
   });
   const { addIngredient, getIngredients } = useContext(RecipeContext);
   const { isMobile } = useContext(GlobalContext);
@@ -34,7 +43,10 @@ export const IngredientCard: FC<Props> = ({ image, alt, name }) => {
   return (
     <>
       <div className="bg-[#CBA55F] w-[45%] sm:w-[30%] rounded-lg  drop-shadow-lg mb-4">
-        <div className="absolute right-[-45px] top-[-5px] mr-9 bg-[#cacaca] hover:bg-[#6b6b6b] hover:text-white flex h-7 w-7 cursor-pointer flex-col items-center justify-center rounded-full border border-none tracking-wide shadow-lg">
+        <div
+          onClick={() => removeIngredient(id)}
+          className="absolute right-[-45px] top-[-5px] mr-9 bg-[#cacaca] hover:bg-[#6b6b6b] hover:text-white flex h-7 w-7 cursor-pointer flex-col items-center justify-center rounded-full border border-none tracking-wide shadow-lg"
+        >
           <span className="pb-1">x</span>
         </div>
         <div className="grid place-items-center">
@@ -42,7 +54,7 @@ export const IngredientCard: FC<Props> = ({ image, alt, name }) => {
             src={image}
             alt={alt}
             width={isMobile ? 75 : 90}
-            className="mt-1"
+            className="mt-1 h-20 object-contain"
           />
           <h2 className="font-bold mb-1">{name}</h2>
           <div className=" h-5 w-32 flex justify-center">

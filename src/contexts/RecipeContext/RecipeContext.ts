@@ -3,6 +3,7 @@ import { createContext } from 'react';
 export interface Ingredient {
   id: number;
   name: string;
+  image: string;
   quantity: number;
 }
 
