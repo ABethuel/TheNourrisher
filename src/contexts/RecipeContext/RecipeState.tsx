@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Ingredient, Recipe, RecipeContext } from './RecipeContext';
 
 interface Props {
@@ -10,26 +10,36 @@ export const RecipeState: FC<Props> = ({ children }) => {
   const [possibleRecipes, setPossibilities] = useState<Recipe[]>();
   const [chosenRecipe, setChosenRecipe] = useState<Recipe>();
 
+  useEffect(() => {
+    if (ingredients.length === 0) {
+      const ingredientsFromStorage = localStorage.getItem('ingredients');
+      const ingredientsParsed: Ingredient[] = JSON.parse(
+        ingredientsFromStorage || ''
+      );
+      setIngredientsState(ingredientsParsed);
+    }
+  }, []);
+
   const setIngredients = (ingredients: Ingredient[]) => {
     setIngredientsState(ingredients);
     localStorage.removeItem('ingredients');
     localStorage.setItem('ingredients', JSON.stringify(ingredients));
   };
 
-  const getIngredients = (): Ingredient[] | undefined => {
-    if (!ingredients) {
-      const ingredientsFromStorage = localStorage.getItem('ingredients');
-      const ingredientsParsed: Ingredient[] = JSON.parse(
-        ingredientsFromStorage || ''
-      );
-      return ingredientsParsed;
+  /*  const getIngredients = (): Ingredient[] | undefined => {
+    if (ingredients.length === 0) {
+      if (typeof window !== 'undefined') {
+        const ingredientsFromStorage = localStorage.getItem('ingredients');
+        const ingredientsParsed: Ingredient[] = JSON.parse(
+          ingredientsFromStorage || ''
+        );
+        console.log('test');
+        return ingredientsParsed;
+      }
     }
+    console.log('hjkhh');
     return ingredients;
-  };
-
-  const addIngredient = (ingredient: Ingredient): void => {
-    setIngredientsState([...ingredients, ingredient]);
-  };
+  }; */
 
   const setPossibleRecipes = (recipes: Recipe[]) => {
     setPossibilities(recipes);
@@ -71,8 +81,7 @@ export const RecipeState: FC<Props> = ({ children }) => {
       value={{
         ingredients,
         setIngredients,
-        getIngredients,
-        addIngredient,
+        //getIngredients,
         possibleRecipes,
         setPossibleRecipes,
         getPossibleRecipes,

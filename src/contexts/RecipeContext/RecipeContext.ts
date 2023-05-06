@@ -30,8 +30,7 @@ export interface Step {
 interface RecipeContextType {
   ingredients: Ingredient[] | undefined;
   setIngredients: (ingredients: Ingredient[]) => void;
-  getIngredients: () => Ingredient[] | undefined;
-  addIngredient: (ingredients: Ingredient) => void;
+  // getIngredients: () => Ingredient[] | undefined;
   possibleRecipes: Recipe[] | undefined;
   setPossibleRecipes: (recipes: Recipe[]) => void;
   getPossibleRecipes: () => Recipe[] | undefined;

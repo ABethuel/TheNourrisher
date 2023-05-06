@@ -13,6 +13,7 @@ interface Props {
   image: string;
   alt?: string;
   name: string;
+  quantity?: number;
   removeIngredient: (id: number) => void;
   changeQuantity: (quantity: number, id: number) => void;
 }
@@ -22,14 +23,15 @@ export const IngredientCard: FC<Props> = ({
   alt,
   name,
   id,
+  quantity,
   removeIngredient,
   changeQuantity,
 }) => {
-  const [numberOfItems, setNumberOfItems] = useState(1);
+  const [numberOfItems, setNumberOfItems] = useState(quantity);
   const [ingredient, setIngredient] = useState<Ingredient>({
     id: id,
     name: name,
-    quantity: numberOfItems,
+    quantity: quantity || 1,
     image: image,
   });
   const { isMobile } = useContext(GlobalContext);

@@ -1,4 +1,3 @@
-import { Inter } from 'next/font/google';
 import { IngredientCard } from '@/components/Ingredient/IngredientCard';
 import { CustomButton } from '@/components/Controls/Button/CustomButton';
 import { Fragment, useContext, useEffect, useState } from 'react';
@@ -8,17 +7,19 @@ import {
 } from '@/contexts/RecipeContext/RecipeContext';
 import { Combobox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
-import { ingredients } from '@/data/ingredients';
+import { ingredientsData } from '@/data/ingredients';
 
 export default function Home() {
-  const [chosenIngredients, setChosenIngredients] = useState<Ingredient[]>([]);
   const [newIngredient, setNewIngredient] = useState<Ingredient>();
-  const { setIngredients, getIngredients } = useContext(RecipeContext);
+  const { setIngredients, ingredients } = useContext(RecipeContext);
+  const [chosenIngredients, setChosenIngredients] = useState<Ingredient[]>(
+    ingredients || []
+  );
   const [searchQuery, setSearchQuery] = useState('');
 
-  const findRecipe = (): void => {
-    setIngredients(chosenIngredients);
-  };
+  useEffect(() => {
+    if (ingredients) setChosenIngredients(ingredients);
+  }, [ingredients]);
 
   useEffect(() => {
     console.log(newIngredient);
@@ -39,8 +40,8 @@ export default function Home() {
 
   const filteredIngredient =
     searchQuery === ''
-      ? ingredients
-      : ingredients.filter((ingredient) =>
+      ? ingredientsData
+      : ingredientsData.filter((ingredient) =>
           ingredient.name
             .toLowerCase()
             .replace(/\s+/g, '')
@@ -60,6 +61,10 @@ export default function Home() {
     const updatedIngredients = [...chosenIngredients];
     updatedIngredients[ingIndex].quantity = quantity + 1;
     setChosenIngredients(updatedIngredients);
+  };
+
+  const findRecipe = (): void => {
+    setIngredients(chosenIngredients);
   };
 
   return (
@@ -168,6 +173,7 @@ export default function Home() {
                 alt={ingredient.name}
                 key={ingredient.id}
                 id={ingredient.id}
+                quantity={ingredient.quantity}
                 removeIngredient={removeIngredient}
                 changeQuantity={changeQuantity}
               />
@@ -175,8 +181,8 @@ export default function Home() {
           </div>
           {chosenIngredients.length > 0 && (
             <CustomButton
-              className="  fixed bottom-20"
               onClick={() => findRecipe()}
+              className="fixed bottom-20 mt-12"
             >
               Trouver une recette
             </CustomButton>
