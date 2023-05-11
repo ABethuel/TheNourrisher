@@ -16,13 +16,13 @@ export default function Home() {
     ingredients || []
   );
   const [searchQuery, setSearchQuery] = useState('');
+  const [returnedPrompt, setReturnedPrompt] = useState('');
 
   useEffect(() => {
     if (ingredients) setChosenIngredients(ingredients);
   }, [ingredients]);
 
   useEffect(() => {
-    console.log(newIngredient);
     if (
       newIngredient &&
       !chosenIngredients.some(
@@ -33,10 +33,6 @@ export default function Home() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newIngredient]);
-
-  useEffect(() => {
-    console.log(chosenIngredients);
-  }, [chosenIngredients]);
 
   const filteredIngredient =
     searchQuery === ''
@@ -63,9 +59,37 @@ export default function Home() {
     setChosenIngredients(updatedIngredients);
   };
 
-  const findRecipe = (): void => {
+  const findRecipe = async (): Promise<void> => {
     setIngredients(chosenIngredients);
+    try {
+      const response = await fetch('/api/generateRecipe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ingredients: chosenIngredients }),
+      });
+
+      const data = await response.json();
+
+      if (response.status !== 200) {
+        throw (
+          data.error ||
+          new Error(`Request failed with status ${response.status}`)
+        );
+      }
+      console.log(data.result);
+      setReturnedPrompt(data.result);
+    } catch (err: any) {
+      console.log('err', err);
+    }
   };
+
+  useEffect(() => {
+    const [recipe1, recipe2, recipe3] = returnedPrompt.split('~');
+    const arrayOfRecipes = [recipe1, recipe2, recipe3];
+    arrayOfRecipes.forEach((recipe) => {});
+  }, [returnedPrompt]);
 
   return (
     <div className="h-screen bg-[#CACACA] sm:bg-[#535961]">
@@ -168,7 +192,10 @@ export default function Home() {
           <div className="flex flex-wrap gap-5 justify-center w-10/12 sm:w-1/3 mt-10">
             {chosenIngredients.map((ingredient: Ingredient) => (
               <IngredientCard
-                image={ingredient.image}
+                image={
+                  ingredient.image ||
+                  'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80'
+                }
                 name={ingredient.name}
                 alt={ingredient.name}
                 key={ingredient.id}

@@ -37,7 +37,7 @@ export const NumberCounter: FC<Props> = ({
       </button>
       <input
         type="number"
-        className="border-x-1 border-y-0 border-gray-600 outline-none focus:outline-none text-center sm:text-end sm:px-2 w-full bg-[#CACACA] font-semibold text-sm hover:text-black focus:text-black text-gray-700 outline-none"
+        className="border-x-1 border-y-0 border-gray-600 outline-none focus:outline-none text-center sm:px-2 w-full bg-[#CACACA] font-semibold text-sm hover:text-black focus:text-black text-gray-700 outline-none"
         name="custom-input-number"
         value={numberOnCounter}
         readOnly
