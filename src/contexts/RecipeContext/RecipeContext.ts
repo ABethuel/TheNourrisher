@@ -12,8 +12,11 @@ export interface Recipe {
   ingredients: Ingredient[];
   name: string;
   image: string;
-  tickets: Ticket[];
-  steps: Step[];
+  tickets?: Ticket[];
+  steps?: Step[];
+  calories?: number;
+  author?: string;
+  durations?: number;
 }
 
 export interface Ticket {
