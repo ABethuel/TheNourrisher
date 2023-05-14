@@ -87,6 +87,21 @@ export default function Home() {
     }
   };
 
+  const getRecipeImage = async (recipeName: string): Promise<string> => {
+    try {
+      const image = await fetch('/api/generateImages', {
+        method: 'POST',
+        body: JSON.stringify({ recipe: recipeName }),
+      });
+
+      const data = await image.json();
+      return data;
+    } catch (err) {
+      console.log('err', err);
+      return 'https://img.playbuzz.com/image/upload/ar_1.8867924528301887,c_crop/v1520601012/jctcyii9cp2y9aouunfn.jpg';
+    }
+  };
+
   useEffect(() => {
     let [recipe1, recipe2, recipe3] = returnedPrompt.split('~');
     recipe1 = recipe1.substring(2);
@@ -99,7 +114,10 @@ export default function Home() {
         : '';
       console.log('name :', name);
       const ingredients = recipe
-        ? recipe.substring(recipe.indexOf(':') + 1, recipe.indexOf('Calories'))
+        ? recipe.substring(
+            recipe.indexOf(':') + 1,
+            recipe.lastIndexOf('Calories')
+          )
         : '';
       const ingredientsParsed = ingredients.split('-');
       ingredientsParsed.shift();
@@ -110,22 +128,26 @@ export default function Home() {
           name: ingredient,
         });
       });
-      const calories = recipe
+      const caloriesFullTxt = recipe
         ? recipe.substring(
             recipe.indexOf('Calories:') + 1,
             recipe.indexOf('Durée')
           )
         : '';
+      const calories = caloriesFullTxt.substring(
+        caloriesFullTxt.indexOf(':') + 1
+      );
       const preparation = recipe
         ? recipe.substring(recipe.lastIndexOf(':') + 1)
         : '';
       const recipeMapped: Recipe = {
         id: Math.floor(Math.random() * 5000),
-        name: name,
+        name: name.replace(':', ''),
         ingredients: ingredientsArray,
         image:
-          'https://img.playbuzz.com/image/upload/ar_1.8867924528301887,c_crop/v1520601012/jctcyii9cp2y9aouunfn.jpg',
+          'https://oaidalleapiprodscus.blob.core.windows.net/private/org-qXAiPE9qlq8Rr8GamjWY3JHg/user-xfVTN1VuenarmR9oIMv6NBU7/img-ggtneh0bMXuH6uMOC8kwGUvy.png?st=2023-05-14T18%3A48%3A34Z&se=2023-05-14T20%3A48%3A34Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-05-13T20%3A59%3A52Z&ske=2023-05-14T20%3A59%3A52Z&sks=b&skv=2021-08-06&sig=33lpGx0uMIJbEbRwX6BZ7f7nOv/HmvGk0HWyroI4kY0%3D',
         duration: preparation,
+        calories: calories,
       };
       recipeParsed.push(recipeMapped);
     });
