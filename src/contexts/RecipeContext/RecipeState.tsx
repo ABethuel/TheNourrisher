@@ -12,11 +12,13 @@ export const RecipeState: FC<Props> = ({ children }) => {
 
   useEffect(() => {
     if (ingredients.length === 0) {
-      const ingredientsFromStorage = localStorage.getItem('ingredients');
-      const ingredientsParsed: Ingredient[] = JSON.parse(
-        ingredientsFromStorage || ''
-      );
-      setIngredientsState(ingredientsParsed);
+      if (localStorage.getItem('ingredients')) {
+        const ingredientsFromStorage = localStorage.getItem('ingredients');
+        const ingredientsParsed: Ingredient[] = JSON.parse(
+          ingredientsFromStorage || ''
+        );
+        setIngredientsState(ingredientsParsed);
+      }
     }
   }, []);
 
