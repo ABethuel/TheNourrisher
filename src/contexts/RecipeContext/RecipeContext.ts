@@ -15,7 +15,7 @@ export interface Recipe {
   tickets?: Ticket[];
   steps?: Step[];
   calories?: string;
-  duraction?: string;
+  duration?: string;
 }
 
 export interface Ticket {

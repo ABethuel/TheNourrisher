@@ -111,6 +111,12 @@ export default function Home() {
         });
       });
       const calories = recipe
+        ? recipe.substring(
+            recipe.indexOf('Calories:') + 1,
+            recipe.indexOf('Durée')
+          )
+        : '';
+      const preparation = recipe
         ? recipe.substring(recipe.lastIndexOf(':') + 1)
         : '';
       const recipeMapped: Recipe = {
@@ -119,7 +125,7 @@ export default function Home() {
         ingredients: ingredientsArray,
         image:
           'https://img.playbuzz.com/image/upload/ar_1.8867924528301887,c_crop/v1520601012/jctcyii9cp2y9aouunfn.jpg',
-        calories: calories,
+        duration: preparation,
       };
       recipeParsed.push(recipeMapped);
     });
