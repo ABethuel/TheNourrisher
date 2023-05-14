@@ -4,7 +4,7 @@ export interface Ingredient {
   id: number;
   name: string;
   image?: string;
-  quantity: number;
+  quantity?: number;
 }
 
 export interface Recipe {
@@ -12,9 +12,10 @@ export interface Recipe {
   ingredients: Ingredient[];
   name: string;
   image: string;
-  tickets: Ticket[];
-  steps: Step[];
-  calories?: number;
+  tickets?: Ticket[];
+  steps?: Step[];
+  calories?: string;
+  duraction?: string;
 }
 
 export interface Ticket {

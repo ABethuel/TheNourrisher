@@ -52,6 +52,10 @@ function generatePrompt(ingredients: Ingredient[]): string {
   ingredients.forEach((ingredient) => {
     promptedIngredients += ingredient.name + ', ';
   });
-  return `Génère 3 recettes contenant au moins ${promptedIngredients}.
-         Ces recettes doivent avoir plusieurs paramètres (un titre, une liste de tous les ingrédients et le nombre de caloris), mais pas d'instructions. Sépare bien toutes tes recettes dans des parties distinctivesavec un "~" entre chaque recettes`;
+  return `Génère 3 recettes contenant au moins ${promptedIngredients}. Met un "~" entre chaque recettes. Ne note pas non plus les étapes de préparation ou les instructions. Ne met pas de retour à la ligne.
+        Le format doit être le suivant (ceci est un exemple à ne pas inclure):
+        Recette 1 - Titre
+        Ingredients: -Tomates -Radis -Poulet
+        Calories: 500
+        Durée de préparation: 30min`;
 }

@@ -3,6 +3,7 @@ import { CustomButton } from '@/components/Controls/Button/CustomButton';
 import { Fragment, useContext, useEffect, useState } from 'react';
 import {
   Ingredient,
+  Recipe,
   RecipeContext,
 } from '@/contexts/RecipeContext/RecipeContext';
 import { Combobox, Transition } from '@headlessui/react';
@@ -11,7 +12,8 @@ import { ingredientsData } from '@/data/ingredients';
 
 export default function Home() {
   const [newIngredient, setNewIngredient] = useState<Ingredient>();
-  const { setIngredients, ingredients } = useContext(RecipeContext);
+  const { setIngredients, ingredients, setPossibleRecipes, possibleRecipes } =
+    useContext(RecipeContext);
   const [chosenIngredients, setChosenIngredients] = useState<Ingredient[]>(
     ingredients || []
   );
@@ -78,7 +80,7 @@ export default function Home() {
           new Error(`Request failed with status ${response.status}`)
         );
       }
-      console.log(data.result);
+      console.log('d', data.result);
       setReturnedPrompt(data.result);
     } catch (err: any) {
       console.log('err', err);
@@ -86,10 +88,47 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const [recipe1, recipe2, recipe3] = returnedPrompt.split('~');
+    let [recipe1, recipe2, recipe3] = returnedPrompt.split('~');
+    recipe1 = recipe1.substring(2);
     const arrayOfRecipes = [recipe1, recipe2, recipe3];
-    arrayOfRecipes.forEach((recipe) => {});
+    const recipeParsed: Recipe[] = [];
+    arrayOfRecipes.forEach((recipe) => {
+      console.log(recipe);
+      const name = recipe
+        ? recipe.substring(12, recipe.lastIndexOf('Ingredients'))
+        : '';
+      console.log('name :', name);
+      const ingredients = recipe
+        ? recipe.substring(recipe.indexOf(':') + 1, recipe.indexOf('Calories'))
+        : '';
+      const ingredientsParsed = ingredients.split('-');
+      ingredientsParsed.shift();
+      const ingredientsArray: Ingredient[] = [];
+      ingredientsParsed.forEach((ingredient) => {
+        ingredientsArray.push({
+          id: Math.floor(Math.random() * 5000),
+          name: ingredient,
+        });
+      });
+      const calories = recipe
+        ? recipe.substring(recipe.lastIndexOf(':') + 1)
+        : '';
+      const recipeMapped: Recipe = {
+        id: Math.floor(Math.random() * 5000),
+        name: name,
+        ingredients: ingredientsArray,
+        image:
+          'https://img.playbuzz.com/image/upload/ar_1.8867924528301887,c_crop/v1520601012/jctcyii9cp2y9aouunfn.jpg',
+        calories: calories,
+      };
+      recipeParsed.push(recipeMapped);
+    });
+    setPossibleRecipes(recipeParsed);
   }, [returnedPrompt]);
+
+  useEffect(() => {
+    console.log('p', possibleRecipes);
+  }, [possibleRecipes]);
 
   return (
     <div className="h-screen bg-[#CACACA] sm:bg-[#535961]">
