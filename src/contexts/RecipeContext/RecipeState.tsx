@@ -29,6 +29,16 @@ export const RecipeState: FC<Props> = ({ children }) => {
         setChosenRecipe(chosenRecipeParsed);
       }
     }
+    if (!possibleRecipes || possibleRecipes?.length === 0) {
+      if (localStorage.getItem('possibleRecipes')) {
+        const possibleRecipesFromStorage =
+          localStorage.getItem('possibleRecipes');
+        const possibleRecipesParsed: Recipe[] = JSON.parse(
+          possibleRecipesFromStorage || ''
+        );
+        setPossibleRecipes(possibleRecipesParsed);
+      }
+    }
   }, []);
 
   const setIngredients = (ingredients: Ingredient[]) => {

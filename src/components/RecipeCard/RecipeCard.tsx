@@ -5,7 +5,7 @@ import {
   Recipe,
   RecipeContext,
 } from '@/contexts/RecipeContext/RecipeContext';
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 
 interface Props {
   recipe: Recipe;
@@ -30,21 +30,24 @@ export const RecipeCard: FC<Props> = ({ recipe }) => {
     >
       <div className="flex gap-2 p-2">
         <img
-          className="w-5/12 rounded-lg h-32 object-contain"
+          className="w-5/12 rounded-lg h-32 object-cover"
           src={recipe.image}
           alt={recipe.name}
         />
         <div className="w-full h-full">
-          <div className=" flex justify-between text-sm ">
+          <div className=" flex justify-between text-xs ">
             <h1 className="font-bold ">{recipe.name}</h1>
-            <p>{recipe.duration}</p>
           </div>
-          <ul className="list-disc ml-5 text-sm mt-2">
+          <ul className="list-disc ml-5 text-xs mt-2">
             {ingredientsToDisplay.map((ingredient) => (
               <li key={ingredient.id}>{ingredient.name}</li>
             ))}
           </ul>
-          <p className="text-sm mt-5 flex justify-end">{recipe.calories}</p>
+          <div className="flex justify-between text-xs mt-6">
+            <p>{recipe.duration}</p>
+
+            <p className="text-xs ">{recipe.calories} Cal</p>
+          </div>
         </div>
       </div>
     </div>

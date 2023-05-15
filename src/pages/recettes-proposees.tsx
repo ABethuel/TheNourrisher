@@ -1,12 +1,14 @@
 import { CustomButton } from '@/components/Controls/Button/CustomButton';
 import { RecipeCard } from '@/components/RecipeCard/RecipeCard';
 import { GlobalContext } from '@/contexts/GlobalContext/GlobalContext';
+import { RecipeContext } from '@/contexts/RecipeContext/RecipeContext';
 import { recipesData } from '@/data/recipe';
 import Image from 'next/image';
 import { useContext } from 'react';
 
 const PosibleRecipe = () => {
   const { goToPath } = useContext(GlobalContext);
+  const { possibleRecipes } = useContext(RecipeContext);
 
   return (
     <div className="h-screen bg-[#CACACA] sm:bg-[#535961]">
@@ -26,9 +28,11 @@ const PosibleRecipe = () => {
       <div className="h-screen bg-[#535961] rounded-3xl ">
         <div className="grid place-items-center">
           <div className="mt-8 sm:mt-0 w-full grid place-items-center sm:w-1/3">
-            {recipesData.map((recipe) => (
-              <RecipeCard recipe={recipe} key={recipe.id} />
-            ))}
+            {possibleRecipes
+              ? possibleRecipes.map((recipe) => (
+                  <RecipeCard recipe={recipe} key={recipe.id} />
+                ))
+              : ''}
           </div>
 
           <CustomButton
