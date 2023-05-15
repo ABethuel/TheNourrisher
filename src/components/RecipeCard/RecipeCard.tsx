@@ -37,7 +37,7 @@ export const RecipeCard: FC<Props> = ({ recipe }) => {
         <div className="w-full h-full">
           <div className=" flex justify-between text-sm ">
             <h1 className="font-bold ">{recipe.name}</h1>
-            <p>{recipe.durations} min</p>
+            <p>{recipe.duration}</p>
           </div>
           <ul className="list-disc ml-5 text-sm mt-2">
             {ingredientsToDisplay.map((ingredient) => (

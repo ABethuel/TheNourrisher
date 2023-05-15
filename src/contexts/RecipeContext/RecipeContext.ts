@@ -3,8 +3,8 @@ import { createContext } from 'react';
 export interface Ingredient {
   id: number;
   name: string;
-  image: string;
-  quantity: number;
+  image?: string;
+  quantity?: number;
 }
 
 export interface Recipe {
@@ -14,9 +14,8 @@ export interface Recipe {
   image: string;
   tickets?: Ticket[];
   steps?: Step[];
-  calories?: number;
-  author?: string;
-  durations?: number;
+  calories?: string;
+  duration?: string;
 }
 
 export interface Ticket {

@@ -9,8 +9,8 @@ export const recipesData: Recipe[] = [
       { id: 3, name: 'Salade', image: '', quantity: 1 },
     ],
     name: 'Salade Caesar',
-    calories: 200,
-    durations: 13,
+    calories: '200 Cal',
+    duration: '13 min',
     image:
       'https://www.lescuilleresenbois.com/wp-content/uploads/2016/10/14448197_1576893105951551_4927602273460158464_n-1024x1024.jpg',
   },
@@ -22,8 +22,8 @@ export const recipesData: Recipe[] = [
       { id: 3, name: 'Salade', image: '', quantity: 1 },
     ],
     name: 'Salade Caesar',
-    calories: 200,
-    durations: 13,
+    calories: '200 Cal',
+    duration: '13 min',
     image:
       'https://www.lescuilleresenbois.com/wp-content/uploads/2016/10/14448197_1576893105951551_4927602273460158464_n-1024x1024.jpg',
   },
@@ -36,8 +36,8 @@ export const recipesData: Recipe[] = [
       { id: 4, name: 'Crouton', image: '', quantity: 1 },
     ],
     name: 'Salade Caesar',
-    calories: 200,
-    durations: 13,
+    calories: '200 Cal',
+    duration: '13 min',
     image:
       'https://www.lescuilleresenbois.com/wp-content/uploads/2016/10/14448197_1576893105951551_4927602273460158464_n-1024x1024.jpg',
   },
