@@ -9,6 +9,8 @@ import {
 import { Combobox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { ingredientsData } from '@/data/ingredients';
+import { GlobalContext } from '@/contexts/GlobalContext/GlobalContext';
+import { Loading } from '@/components/Loading/Loading';
 
 export default function Home() {
   const [newIngredient, setNewIngredient] = useState<Ingredient>();
@@ -19,6 +21,8 @@ export default function Home() {
   );
   const [searchQuery, setSearchQuery] = useState('');
   const [returnedPrompt, setReturnedPrompt] = useState('');
+  const [isLoading, setLoading] = useState(false);
+  const { goToPath } = useContext(GlobalContext);
 
   useEffect(() => {
     if (ingredients) setChosenIngredients(ingredients);
@@ -63,6 +67,7 @@ export default function Home() {
 
   const findRecipe = async (): Promise<void> => {
     setIngredients(chosenIngredients);
+    setLoading(true);
     try {
       const response = await fetch('/api/generateRecipe', {
         method: 'POST',
@@ -82,6 +87,8 @@ export default function Home() {
       }
       console.log('d', data.result);
       setReturnedPrompt(data.result);
+      setLoading(false);
+      goToPath('/recettes-proposees');
     } catch (err: any) {
       console.log('err', err);
     }
@@ -145,7 +152,7 @@ export default function Home() {
         name: name.replace(':', ''),
         ingredients: ingredientsArray,
         image:
-          'https://oaidalleapiprodscus.blob.core.windows.net/private/org-qXAiPE9qlq8Rr8GamjWY3JHg/user-xfVTN1VuenarmR9oIMv6NBU7/img-ggtneh0bMXuH6uMOC8kwGUvy.png?st=2023-05-14T18%3A48%3A34Z&se=2023-05-14T20%3A48%3A34Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-05-13T20%3A59%3A52Z&ske=2023-05-14T20%3A59%3A52Z&sks=b&skv=2021-08-06&sig=33lpGx0uMIJbEbRwX6BZ7f7nOv/HmvGk0HWyroI4kY0%3D',
+          'https://img.playbuzz.com/image/upload/ar_1.8867924528301887,c_crop/v1520601012/jctcyii9cp2y9aouunfn.jpg',
         duration: preparation,
         calories: calories,
       };
@@ -273,6 +280,12 @@ export default function Home() {
               />
             ))}
           </div>
+          {isLoading && (
+            <div className="fixed bottom-10 mb-40">
+              <Loading />
+            </div>
+          )}
+
           {chosenIngredients.length > 0 && (
             <CustomButton
               onClick={() => findRecipe()}
