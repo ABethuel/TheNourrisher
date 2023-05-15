@@ -20,6 +20,15 @@ export const RecipeState: FC<Props> = ({ children }) => {
         setIngredientsState(ingredientsParsed);
       }
     }
+    if (!chosenRecipe) {
+      if (localStorage.getItem('chosenRecipe')) {
+        const chosenRecipeFromStorage = localStorage.getItem('chosenRecipe');
+        const chosenRecipeParsed: Recipe = JSON.parse(
+          chosenRecipeFromStorage || ''
+        );
+        setChosenRecipe(chosenRecipeParsed);
+      }
+    }
   }, []);
 
   const setIngredients = (ingredients: Ingredient[]) => {

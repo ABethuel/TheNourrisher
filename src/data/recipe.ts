@@ -3,8 +3,12 @@ import { Recipe } from '@/contexts/RecipeContext/RecipeContext';
 export const recipesData: Recipe[] = [
   {
     id: 2,
-    ingredients: [],
-    name: 'SaladeCaesar',
+    ingredients: [
+      { id: 1, name: 'Tomate', image: '', quantity: 1 },
+      { id: 2, name: 'Poulet', image: '', quantity: 1 },
+      { id: 3, name: 'Salade', image: '', quantity: 1 },
+    ],
+    name: 'Salade Caesar',
     calories: 200,
     durations: 13,
     image:
@@ -12,8 +16,12 @@ export const recipesData: Recipe[] = [
   },
   {
     id: 5,
-    ingredients: [],
-    name: 'SaladeCaesar',
+    ingredients: [
+      { id: 1, name: 'Tomate', image: '', quantity: 1 },
+      { id: 2, name: 'Poulet', image: '', quantity: 1 },
+      { id: 3, name: 'Salade', image: '', quantity: 1 },
+    ],
+    name: 'Salade Caesar',
     calories: 200,
     durations: 13,
     image:
@@ -21,8 +29,13 @@ export const recipesData: Recipe[] = [
   },
   {
     id: 6,
-    ingredients: [],
-    name: 'SaladeCaesar',
+    ingredients: [
+      { id: 1, name: 'Tomate', image: '', quantity: 1 },
+      { id: 2, name: 'Poulet', image: '', quantity: 1 },
+      { id: 3, name: 'Salade', image: '', quantity: 1 },
+      { id: 4, name: 'Crouton', image: '', quantity: 1 },
+    ],
+    name: 'Salade Caesar',
     calories: 200,
     durations: 13,
     image:

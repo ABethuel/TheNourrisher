@@ -23,16 +23,11 @@ const PosibleRecipe = () => {
         />
       </div>
 
-      <div className="h-screen bg-[#535961] rounded-3xl">
+      <div className="h-screen bg-[#535961] rounded-3xl ">
         <div className="grid place-items-center">
-          <div className="mt-8 w-full grid place-items-center">
+          <div className="mt-8 sm:mt-0 w-full grid place-items-center sm:w-1/3">
             {recipesData.map((recipe) => (
-              <RecipeCard
-                image={recipe.image}
-                key={recipe.id}
-                title={recipe.name}
-                duration={recipe.durations || 0}
-              />
+              <RecipeCard recipe={recipe} key={recipe.id} />
             ))}
           </div>
 
