@@ -2,10 +2,7 @@
 
 import { FC, useContext, useEffect, useState } from 'react';
 import { NumberCounter } from '../Controls/NumberCounter/NumberCounter';
-import {
-  Ingredient,
-  RecipeContext,
-} from '@/contexts/RecipeContext/RecipeContext';
+import { Ingredient } from '@/contexts/RecipeContext/RecipeContext';
 import { GlobalContext } from '@/contexts/GlobalContext/GlobalContext';
 
 interface Props {
@@ -27,7 +24,6 @@ export const IngredientCard: FC<Props> = ({
   removeIngredient,
   changeQuantity,
 }) => {
-  const [numberOfItems, setNumberOfItems] = useState(quantity);
   const [ingredient, setIngredient] = useState<Ingredient>({
     id: id,
     name: name,

@@ -2,7 +2,6 @@ import { CustomButton } from '@/components/Controls/Button/CustomButton';
 import { RecipeCard } from '@/components/RecipeCard/RecipeCard';
 import { GlobalContext } from '@/contexts/GlobalContext/GlobalContext';
 import { RecipeContext } from '@/contexts/RecipeContext/RecipeContext';
-import { recipesData } from '@/data/recipe';
 import Image from 'next/image';
 import { useContext } from 'react';
 
