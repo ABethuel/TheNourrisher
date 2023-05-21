@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import { RecipeContext } from '@/contexts/RecipeContext/RecipeContext';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { RecipeDetailTicket } from '@/components/RecipeDetailTicket/RecipeDetailTicket';
 
@@ -7,7 +8,9 @@ const Recipe = () => {
   const { chosenRecipe } = useContext(RecipeContext);
   const [isLiked, setIsLiked] = useState(false);
 
-  const updateRecipe = () => {};
+  useEffect(() => {
+    console.log(chosenRecipe);
+  }, []);
 
   return (
     <div className="h-screen bg-[#CACACA] sm:bg-[#535961]">
@@ -81,7 +84,7 @@ const Recipe = () => {
           </div>
 
           <p className="text-white text-xl text-center text-font mt-12 mb-20">
-            Bonne dégustation
+            Bonne dégustation !
           </p>
         </div>
       </div>
