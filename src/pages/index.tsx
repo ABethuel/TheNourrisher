@@ -287,13 +287,14 @@ export default function Home() {
           )}
 
           {chosenIngredients.length > 0 && (
-            <CustomButton
-              onClick={() => findRecipe()}
-              className="fixed bottom-20 mt-12"
-            >
+            
+            <CustomButton onClick={() => findRecipe()} className="fixed bottom-28">
               Trouver une recette
             </CustomButton>
-          )}
+          )} 
+          <CustomButton className="fixed bottom-20 right-2 h-12 w-12 flex items-center justify-center">
+            <img src="/ImageNavBar/qr-code.png" alt="QR Code" className="h-5 w-5 object-cover"/>
+          </CustomButton>
         </div>
       </div>
     </div>
