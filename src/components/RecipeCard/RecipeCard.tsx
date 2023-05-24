@@ -6,6 +6,7 @@ import {
   RecipeContext,
 } from '@/contexts/RecipeContext/RecipeContext';
 import { FC, useContext, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 interface Props {
   recipe: Recipe;
@@ -14,9 +15,12 @@ interface Props {
 export const RecipeCard: FC<Props> = ({ recipe }) => {
   const [ingredientsToDisplay, setIngredientsToDisplay] = useState<
     Ingredient[]
-  >(recipe.ingredients.slice(0, 3));
+  >(recipe.ingredients.slice(0, 4));
   const { setRecipe } = useContext(RecipeContext);
-  const { goToPath } = useContext(GlobalContext);
+  const { goToPath, getPath } = useContext(GlobalContext);
+  //const location = useLocation();
+  console.log(getPath())
+  //const isOnCommunityPage = location.pathname === "/community"; 
 
   const choseRecipe = () => {
     setRecipe(recipe);
@@ -46,7 +50,10 @@ export const RecipeCard: FC<Props> = ({ recipe }) => {
           <div className="flex justify-between text-xs mt-6">
             <p>{recipe.duration}</p>
 
-            <p className="text-xs ">{recipe.calories} Cal</p>
+            <p className="text-xs ">{getPath() == "/community" ? 'Par ' + recipe.author : recipe.calories + 'Cal'}</p>
+
+            
+            
           </div>
         </div>
       </div>
