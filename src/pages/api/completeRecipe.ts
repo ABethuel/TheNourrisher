@@ -45,5 +45,14 @@ export default async function (req: any, res: any) {
 }
 
 function generatePrompt(recipe: Recipe): string {
-  return '';
+  let promptedIngredients = '';
+  if (recipe.ingredients.length > 0) {
+    recipe.ingredients.forEach((ingredient) => {
+      promptedIngredients += ingredient.name + ', ';
+    });
+  }
+
+  return `Donne les instructions, le temps de cuisson et la difficulté d'une recette 
+  (ne note pas les ingrédients et n'ajoute pas de texte superflu) dont le 
+  nom est : "${recipe.name}" et les ingrédients sont ${promptedIngredients} sous le format : - Temps de cuisson : 12min   - Difficultés : Facile  - Etapes : ...`;
 }

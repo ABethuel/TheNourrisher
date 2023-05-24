@@ -12,7 +12,8 @@ export interface Recipe {
   ingredients: Ingredient[];
   name: string;
   image: string;
-  tickets?: Ticket[];
+  difficulty?: string;
+  cooking?: string;
   steps?: Step[];
   calories?: string;
   duration?: string;

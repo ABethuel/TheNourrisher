@@ -3,14 +3,44 @@ import { RecipeContext } from '@/contexts/RecipeContext/RecipeContext';
 import { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { RecipeDetailTicket } from '@/components/RecipeDetailTicket/RecipeDetailTicket';
+import { RecipeStep } from '@/components/RecipeStep/RecipeStep';
 
 const Recipe = () => {
   const { chosenRecipe } = useContext(RecipeContext);
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    console.log(chosenRecipe);
+    completeRecipe();
   }, []);
+  const completeRecipe = async () => {
+    try {
+      const response = await fetch('/api/completeRecipe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ recipe: chosenRecipe }),
+      });
+
+      const data = await response.json();
+
+      if (response.status !== 200) {
+        throw (
+          data.error ||
+          new Error(`Request failed with status ${response.status}`)
+        );
+      }
+      console.log('d', data.result);
+      updateRecipe(data.result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateRecipe = (recipeRaw: string) => {
+    const cookingRaw = recipeRaw.substring(0, recipeRaw.lastIndexOf('mn'));
+    console.log(cookingRaw);
+  };
 
   return (
     <div className="h-screen bg-[#CACACA] sm:bg-[#535961]">
@@ -61,7 +91,7 @@ const Recipe = () => {
             <h2 className="font-bold text-white text-lg">Ingrédients</h2>
           </div>
 
-          <div className="flex justify-between w-full mb-10">
+          <div className="flex justify-between w-full mb-8">
             <ul className="list-disc mt-5 px-5">
               {chosenRecipe?.ingredients.map((ingredient) => (
                 <li className="text-white font-bold" key={ingredient.id}>
@@ -78,10 +108,14 @@ const Recipe = () => {
             />
           </div>
 
-          <div className="flex gap-2 items-center justify-start">
+          <div className="flex gap-2 items-center justify-start mb-6 mt-3">
             <Image src={'/prep.png'} alt="" width={40} height={40} />
             <h2 className="font-bold text-white text-lg">Préparation</h2>
           </div>
+
+          <RecipeStep />
+          <RecipeStep />
+          <RecipeStep />
 
           <p className="text-white text-xl text-center text-font mt-12 mb-20">
             Bonne dégustation !
