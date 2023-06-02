@@ -38,8 +38,8 @@ const Recipe = () => {
   };
 
   const updateRecipe = (recipeRaw: string) => {
-    const cookingRaw = recipeRaw.substring(0, recipeRaw.lastIndexOf('mn'));
-    console.log(cookingRaw);
+    const cookingRaw = recipeRaw.substring(0, 12);
+    console.log('cr', cookingRaw);
   };
 
   return (
