@@ -11,8 +11,8 @@ const PosibleRecipe = () => {
 
   return (
     <div className="h-screen bg-[#535961] sm:bg-[#535961]">
-      <div className="grid place-items-center mb-10">
-        <h1 className="mt-8 text-center font-bold w-10/12 text-white text-xl">
+      <div className="grid place-items-center mb-4">
+        <h1 className="mt-8 text-center font-bold w-10/12 text-white text-xl mb-4">
           Les plats de la communauté !
         </h1>
         <Image

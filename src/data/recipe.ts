@@ -27,7 +27,7 @@ export const recipesData: Recipe[] = [
     author: 'Le cuisto',
     duration: '13 min',
     image:
-      'https://www.lescuilleresenbois.com/wp-content/uploads/2016/10/14448197_1576893105951551_4927602273460158464_n-1024x1024.jpg',
+      'https://www.galbani.fr/wp-content/uploads/2020/04/AdobeStock_157570276-2.jpeg',
   },
   {
     id: 6,
