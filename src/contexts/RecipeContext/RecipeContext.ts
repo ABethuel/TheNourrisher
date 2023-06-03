@@ -14,7 +14,7 @@ export interface Recipe {
   image: string;
   difficulty?: string;
   cooking?: string;
-  steps?: Step[];
+  steps?: string[];
   calories?: string;
   duration?: string;
 }
