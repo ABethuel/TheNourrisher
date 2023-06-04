@@ -37,8 +37,8 @@ const Recipe = () => {
               <Image
                 src={isLiked ? '/heart/full.png' : '/heart/empty.png'}
                 alt={'Like'}
-                width={45}
-                height={45}
+                width={38}
+                height={38}
                 onClick={() => setIsLiked(!isLiked)}
               />
             </div>
@@ -93,7 +93,7 @@ const Recipe = () => {
             <RecipeStep label={step} key={Math.floor(Math.random() * 1000)} />
           ))}
 
-          <p className="text-white text-xl text-center text-font mt-12 mb-auto">
+          <p className="text-white text-xl text-center text-font mt-12 mb-auto font-bold">
             Bonne dégustation !
           </p>
           <br></br>
@@ -103,10 +103,12 @@ const Recipe = () => {
           <br></br>
           <br></br>
           <br></br>
+          <br></br>
+
           <div className="grid place-items-center">
             <CustomButton
               onClick={() => goToPath('/recettes-proposees')}
-              className="fixed bottom-20 mt-12"
+              className="fixed bottom-28 mt-12"
             >
               Retour à la sélection
             </CustomButton>

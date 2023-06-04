@@ -8,8 +8,8 @@ import Image from 'next/image';
 import { FC, useContext, useState } from 'react';
 
 const Community = () => {
-  const { goToPath } = useContext(GlobalContext);
   const [openModal, closeModal] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const createRecipe = () => {
     return <CreateModalRecipe callBackCloseModal={closeModal} />;
@@ -34,13 +34,17 @@ const Community = () => {
           <div className="mt-8 sm:mt-0 w-full grid place-items-center sm:w-1/3">
             {recipesData
               ? recipesData.map((recipe) => (
-                  <RecipeCard recipe={recipe} key={recipe.id} />
+                  <RecipeCard
+                    recipe={recipe}
+                    key={recipe.id}
+                    isLoading={setLoading}
+                  />
                 ))
               : ''}
           </div>
           <CustomButton
             onClick={() => closeModal(!openModal)}
-            className="fixed bottom-20 mt-12"
+            className="fixed bottom-28 mt-12"
           >
             Proposer une recette
           </CustomButton>

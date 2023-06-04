@@ -46,7 +46,7 @@ const PosibleRecipe = () => {
           )}
           <CustomButton
             onClick={() => goToPath('/')}
-            className="fixed bottom-20 mt-12"
+            className="fixed bottom-28 mt-12"
           >
             Ajouter des ingrédients
           </CustomButton>
