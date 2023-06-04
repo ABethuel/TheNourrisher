@@ -289,7 +289,7 @@ export default function Home() {
           {chosenIngredients.length > 0 && (
             <CustomButton
               onClick={() => findRecipe()}
-              className="fixed bottom-20 mt-12"
+              className="fixed bottom-28"
             >
               Trouver une recette
             </CustomButton>

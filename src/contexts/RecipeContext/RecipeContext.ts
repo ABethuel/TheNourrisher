@@ -12,10 +12,12 @@ export interface Recipe {
   ingredients: Ingredient[];
   name: string;
   image: string;
-  tickets?: Ticket[];
-  steps?: Step[];
+  difficulty?: string;
+  cooking?: string;
+  steps?: string[];
   calories?: string;
   duration?: string;
+  author?: string;
 }
 
 export interface Ticket {
