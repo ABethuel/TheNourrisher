@@ -1,13 +1,19 @@
 import { CustomButton } from '@/components/Controls/Button/CustomButton';
+import { CreateModalRecipe } from '@/components/Modals/ModalCreateRecipe';
 import { RecipeCard } from '@/components/RecipeCard/RecipeCard';
 import { GlobalContext } from '@/contexts/GlobalContext/GlobalContext';
 import { RecipeContext } from '@/contexts/RecipeContext/RecipeContext';
 import { recipesData } from '@/data/recipe';
 import Image from 'next/image';
-import { useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 
-const PosibleRecipe = () => {
+const Community = () => {
   const { goToPath } = useContext(GlobalContext);
+  const [openModal, closeModal] = useState(false);
+
+  const createRecipe = () => {
+    return <CreateModalRecipe callBackCloseModal={closeModal} />;
+  };
 
   return (
     <div className="h-screen bg-[#535961] sm:bg-[#535961]">
@@ -32,17 +38,17 @@ const PosibleRecipe = () => {
                 ))
               : ''}
           </div>
-
           <CustomButton
-            onClick={() => goToPath('/nouvelle-recette')}
+            onClick={() => closeModal(!openModal)}
             className="fixed bottom-20 mt-12"
           >
             Proposer une recette
           </CustomButton>
+          {openModal && createRecipe()}
         </div>
       </div>
     </div>
   );
 };
 
-export default PosibleRecipe;
+export default Community;
