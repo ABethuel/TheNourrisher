@@ -10,7 +10,7 @@ import { GlobalContext } from '@/contexts/GlobalContext/GlobalContext';
 const Recipe = () => {
   const { chosenRecipe } = useContext(RecipeContext);
   const [isLiked, setIsLiked] = useState(false);
-  const { goToPath } = useContext(GlobalContext);
+  const { goToPath, isMobile } = useContext(GlobalContext);
 
   return (
     <div className="h-screen bg-[#CACACA] sm:bg-[#535961]">
@@ -18,16 +18,20 @@ const Recipe = () => {
         <h1 className="mt-8 text-center font-bold w-10/12 sm:text-white text-xl">
           Votre recette
         </h1>
-        <h2 className="font-bold mb-1">A vos fourneaux !</h2>
+        <h2 className="font-bold mb-1 sm:text-white">A vos fourneaux !</h2>
         <Image
-          src={'/LogoTheNourisherNoir_short.png'}
+          src={
+            isMobile
+              ? '/LogoTheNourisherNoir_short.png'
+              : '/LogoTheNourisherGold.png'
+          }
           alt={'Logo The Nourrisher'}
           width={40}
           height={40}
         />
       </div>
 
-      <div className="h-screen bg-[#535961] rounded-3xl pb-50 mb-10">
+      <div className="h-screen bg-[#535961] rounded-3xl pb-50 mb-10 sm:grid sm:place-items-center">
         <div className="sm:mt-0 w-full sm:w-1/3 px-9">
           <div className=" flex justify-between w-full items-center gap-2">
             <h1 className="text-lg mt-8 font-bold text-white">
