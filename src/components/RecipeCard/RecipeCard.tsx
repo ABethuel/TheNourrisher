@@ -15,9 +15,10 @@ interface Props {
 export const RecipeCard: FC<Props> = ({ recipe, isLoading }) => {
   const [ingredientsToDisplay, setIngredientsToDisplay] = useState<
     Ingredient[]
-  >(recipe.ingredients.slice(0, 3));
+  >(recipe.ingredients.slice(0, 4));
   const { setRecipe } = useContext(RecipeContext);
-  const { goToPath } = useContext(GlobalContext);
+  const { goToPath, getPath } = useContext(GlobalContext);
+  console.log(getPath());
 
   const clickOnRecipe = async () => {
     setRecipe(recipe);
@@ -103,7 +104,11 @@ export const RecipeCard: FC<Props> = ({ recipe, isLoading }) => {
           <div className="flex justify-between text-xs mt-6">
             <p>{recipe.duration}</p>
 
-            <p className="text-xs ">{recipe.calories} Cal</p>
+            <p className="text-xs ">
+              {getPath() == '/community'
+                ? 'Par ' + recipe.author
+                : recipe.calories + 'Cal'}
+            </p>
           </div>
         </div>
       </div>
