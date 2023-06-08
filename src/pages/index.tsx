@@ -11,6 +11,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { ingredientsData } from '@/data/ingredients';
 import { GlobalContext } from '@/contexts/GlobalContext/GlobalContext';
 import { Loading } from '@/components/Loading/Loading';
+import { ComboBox } from '@/components/Controls/ComboBox/ComboBox';
 
 export default function Home() {
   const [newIngredient, setNewIngredient] = useState<Ingredient>();
@@ -40,6 +41,16 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newIngredient]);
 
+  const callBackAddIngredient = (newIngredient: Ingredient) => {
+    if (
+      newIngredient &&
+      !chosenIngredients.some(
+        (ingredient) => ingredient.id === newIngredient.id
+      )
+    ) {
+      setChosenIngredients([...chosenIngredients, newIngredient]);
+    }
+  };
   const filteredIngredient =
     searchQuery === ''
       ? ingredientsData
@@ -172,7 +183,7 @@ export default function Home() {
           Avec quels ingrédients souhaitez vous cuisiner aujourd&apos;hui ?
         </h1>
         <div className="mt-5 z-10">
-          <Combobox value={newIngredient} onChange={setNewIngredient}>
+          {/*           <Combobox value={newIngredient} onChange={setNewIngredient}>
             <div className="relative mt-1">
               <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -255,7 +266,12 @@ export default function Home() {
                 </Combobox.Options>
               </Transition>
             </div>
-          </Combobox>
+          </Combobox> */}
+          <ComboBox
+            placeholder="Insérer un ingrédient"
+            items={filteredIngredient}
+            callBackMethod={callBackAddIngredient}
+          />
         </div>
       </div>
       <div className="h-screen bg-[#535961] rounded-3xl">

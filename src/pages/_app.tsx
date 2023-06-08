@@ -1,4 +1,4 @@
-import { HeaderOrdi } from '@/components/NavBar/HeaderOrdi';
+import { Header } from '@/components/NavBar/Header';
 import { NavBar } from '@/components/NavBar/NavBar';
 import { GlobalState } from '@/contexts/GlobalContext/GlobalState';
 import { RecipeState } from '@/contexts/RecipeContext/RecipeState';
@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalState>
         <RecipeState>
-          <HeaderOrdi></HeaderOrdi>
+          <Header></Header>
           <Component {...pageProps} />
           <NavBar></NavBar>
         </RecipeState>
