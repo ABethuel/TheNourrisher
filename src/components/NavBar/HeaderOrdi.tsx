@@ -4,37 +4,19 @@ import { useContext } from "react";
 export const HeaderOrdi = () => {
   const {goToPath}=useContext(GlobalContext)
   return (
-      <header className="bg-gray-300 p-4 hidden sm:block">
+<header className="flex justify-around items-center p-4">
+  <div className="flex items-center">
+    <a className="hover:cursor-pointer" onClick={() => goToPath('/')}>
+      <img src="/LogoTheNourisherGold.png"></img>
+    </a>
+    <button className="bg-transparent mx-2" onClick={() => goToPath('/')}>Cuisiner</button>
+    <button className="bg-transparent mx-2" onClick={() => goToPath('/community')}>Communauté</button>
+  </div>
+  <div className="flex items-center">
+    <button className="bg-transparent mx-2">Se connecter</button>
+    <button className="bg-black text-white px-2 rounded mx-2">Inscription</button>
+  </div>
+</header>
 
-        <ul className="flex justify-between max-w-5xl mx-auto">
-          <li onClick={() => goToPath('/')}>
-            <a className="flex items-center">
-              <img
-                src="/imageNavBar/hot-pot.png"
-                alt="Cuisiner"
-                className="w-6 h-6 mr-2"
-              />
-              <span>Cuisiner</span>
-            </a>
-          </li>
-          <li>
-            <a href="#communaute" className="flex items-center">
-              <img
-                src="/imageNavBar/meeting.png"
-                alt="Communauté"
-                className="w-6 h-6 mr-2"
-              />
-              <span>Communauté</span>
-            </a>
-          </li>
-          <li>
-            <a href="#profil" className="flex items-center">
-              <img src="/imageNavBar/profile-user.png" alt="Profil" className="w-6 h-6 mr-2"/>
-              <span>Profil</span>
-            </a>
-          </li>
-
-        </ul>
-      </header>
   );
 };
