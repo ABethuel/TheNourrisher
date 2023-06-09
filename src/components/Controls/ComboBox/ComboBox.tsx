@@ -15,6 +15,17 @@ export const ComboBox: FC<Props> = ({ placeholder, items, callBackMethod }) => {
   useEffect(() => {
     callBackMethod(newValue);
   });
+
+  const filteredItems =
+    searchQuery === ''
+      ? items
+      : items.filter((item) =>
+          item.name
+            .toLowerCase()
+            .replace(/\s+/g, '')
+            .includes(searchQuery.toLowerCase().replace(/\s+/g, ''))
+        );
+
   return (
     <>
       <Combobox value={newValue} onChange={setNewValue}>
@@ -56,12 +67,12 @@ export const ComboBox: FC<Props> = ({ placeholder, items, callBackMethod }) => {
             afterLeave={() => setSearchQuery('')}
           >
             <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {items.length === 0 && searchQuery !== '' ? (
+              {filteredItems.length === 0 && searchQuery !== '' ? (
                 <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                   Nothing found.
                 </div>
               ) : (
-                items.map((item) => (
+                filteredItems.map((item) => (
                   <Combobox.Option
                     key={item.id}
                     className={({ active }) =>
